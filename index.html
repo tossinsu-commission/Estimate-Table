@@ -136,26 +136,22 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 </div></div>
 <script>
 var RAW=null, USERS=null;
+var D={products:[],rates:{},companies:[]};
 Promise.all([
   fetch('data.json').then(function(r){return r.json();}),
   fetch('users.json').then(function(r){return r.json();})
 ]).then(function(results){
   RAW=results[0];
   USERS=results[1];
-  // Init app data
   D.products=RAW.products.map(function(p,i){var o={};for(var k in p)o[k]=p[k];o.id=i;return o;});
   D.rates=JSON.parse(JSON.stringify(RAW.rates));
   D.companies=RAW.companies;
-  // Populate company list is handled by onCompSrch
 }).catch(function(err){
-  alert('데이터 로딩 실패: '+err.message+'\n페이지를 새로고침해주세요.');
+  alert('데이터 로딩 실패: '+err.message);
 });
 
-var D={products:[],rates:{},companies:[]};
-
-const D={products:RAW.products.map((p,i)=>({...p,id:i})),rates:JSON.parse(JSON.stringify(RAW.rates)),companies:RAW.companies};
-let CU=null,isA=false;
-let LL=JSON.parse(localStorage.getItem('ll')||'[]');
+var CU=null,isA=false;
+var LL=JSON.parse(localStorage.getItem('ll')||'[]');
 LL=LL.filter(l=>Date.now()-new Date(l.ts).getTime()<2592000000);
 localStorage.setItem('ll',JSON.stringify(LL));
 
@@ -305,7 +301,7 @@ function ulRate(input){var file=input.files[0];if(!file)return;if(!confirm('기�
 
 // LOGS
 function rLogs(){var s=document.getElementById('logSearch').value.toLowerCase();var fl=LL.filter(function(l){if(s&&l.n.toLowerCase().indexOf(s)===-1&&l.id.toLowerCase().indexOf(s)===-1)return false;return true;});document.getElementById('ltb').innerHTML=fl.slice(0,500).map(function(l){var d=new Date(l.ts);return '<tr><td>'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</td><td>'+l.id+'</td><td>'+l.n+'</td><td>'+(l.t||'')+'</td><td>'+(l.o||'')+'</td></tr>';}).join('');}
-
+                                                                                                                               
 </script>
 </body>
 </html>
