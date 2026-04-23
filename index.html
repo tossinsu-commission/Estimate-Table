@@ -135,22 +135,24 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 <div id="aLogs" class="hidden"><div class="card" style="padding:16px;"><div class="admin-toolbar"><input type="text" id="logSearch" placeholder="이름/아이디 검색..." oninput="rLogs()" style="flex:1;min-width:200px"/><span style="font-size:13px;color:#888;">최근 1개월</span></div><div style="overflow:auto;max-height:500px;"><table class="log-table"><thead><tr><th>시간</th><th>아이디</th><th>성명</th><th>직책</th><th>조직</th></tr></thead><tbody id="ltb"></tbody></table></div></div></div>
 </div></div>
 <script>
-
 var RAW=null, USERS=null;
-(function(){
-  Promise.all([
-    fetch('data.json').then(function(r){return r.json();}),
-    fetch('users.json').then(function(r){return r.json();})
-  ]).then(function(results){
-    RAW=results[0];
-    USERS=results[1];
-    initApp();
-  }).catch(function(err){
-    alert('데이터 로딩 실패: '+err.message);
-  });
-})();
+Promise.all([
+  fetch('data.json').then(function(r){return r.json();}),
+  fetch('users.json').then(function(r){return r.json();})
+]).then(function(results){
+  RAW=results[0];
+  USERS=results[1];
+  // Init app data
+  D.products=RAW.products.map(function(p,i){var o={};for(var k in p)o[k]=p[k];o.id=i;return o;});
+  D.rates=JSON.parse(JSON.stringify(RAW.rates));
+  D.companies=RAW.companies;
+  // Populate company list is handled by onCompSrch
+}).catch(function(err){
+  alert('데이터 로딩 실패: '+err.message+'\n페이지를 새로고침해주세요.');
+});
 
-function initApp(){
+var D={products:[],rates:{},companies:[]};
+
 const D={products:RAW.products.map((p,i)=>({...p,id:i})),rates:JSON.parse(JSON.stringify(RAW.rates)),companies:RAW.companies};
 let CU=null,isA=false;
 let LL=JSON.parse(localStorage.getItem('ll')||'[]');
@@ -303,12 +305,6 @@ function ulRate(input){var file=input.files[0];if(!file)return;if(!confirm('기�
 
 // LOGS
 function rLogs(){var s=document.getElementById('logSearch').value.toLowerCase();var fl=LL.filter(function(l){if(s&&l.n.toLowerCase().indexOf(s)===-1&&l.id.toLowerCase().indexOf(s)===-1)return false;return true;});document.getElementById('ltb').innerHTML=fl.slice(0,500).map(function(l){var d=new Date(l.ts);return '<tr><td>'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</td><td>'+l.id+'</td><td>'+l.n+'</td><td>'+(l.t||'')+'</td><td>'+(l.o||'')+'</td></tr>';}).join('');}
-ows.length;i++){var row=rows[i];if(!row||!row[0])continue;var key=String(row[0]),pm={};for(var j=1;j<hd.length;j++){var v=parseFloat(row[j]);if(!isNaN(v)&&v!==0)pm[String(hd[j])]=v;}nr[key]=pm;cnt++;}D.rates=nr;fRate();alert(cnt+'개 지급률 업로드');}catch(err){alert('오류:'+err.message);}input.value='';};reader.readAsArrayBuffer(file);}
-
-// LOGS
-function rLogs(){var s=document.getElementById('logSearch').value.toLowerCase();var fl=LL.filter(function(l){if(s&&l.n.toLowerCase().indexOf(s)===-1&&l.id.toLowerCase().indexOf(s)===-1)return false;return true;});document.getElementById('ltb').innerHTML=fl.slice(0,500).map(function(l){var d=new Date(l.ts);return '<tr><td>'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</td><td>'+l.id+'</td><td>'+l.n+'</td><td>'+(l.t||'')+'</td><td>'+(l.o||'')+'</td></tr>';}).join('');}
-
-}
 
 </script>
 </body>
