@@ -301,7 +301,7 @@ function ulRate(input){var file=input.files[0];if(!file)return;if(!confirm('ê¸°ì
 
 // LOGS
 function rLogs(){var s=document.getElementById('logSearch').value.toLowerCase();var fl=LL.filter(function(l){if(s&&l.n.toLowerCase().indexOf(s)===-1&&l.id.toLowerCase().indexOf(s)===-1)return false;return true;});document.getElementById('ltb').innerHTML=fl.slice(0,500).map(function(l){var d=new Date(l.ts);return '<tr><td>'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</td><td>'+l.id+'</td><td>'+l.n+'</td><td>'+(l.t||'')+'</td><td>'+(l.o||'')+'</td></tr>';}).join('');}
-                                                                                                                               
+                                                                                                                               
 </script>
 </body>
 </html>
