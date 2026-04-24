@@ -130,7 +130,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 <div id="adminSection" class="admin-section">
 <div class="tab-bar"><div class="tab active" onclick="aTab('products')">상품 관리</div><div class="tab" onclick="aTab('rates')">지급률 관리</div><div class="tab" onclick="aTab('users')">이용자 관리</div><div class="tab" onclick="aTab('logs')">로그인 기록</div></div>
 <div class="admin-container">
-<div id="aProducts"><div class="stats-bar">전체 상품: <span class="stat-val" id="st1">0</span> | 보험사: <span class="stat-val" id="st2">0</span> | 상품군: <span class="stat-val" id="st3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="acf" onchange="fProd()" style="min-width:140px"><option value="">전체 보험사</option></select><input type="text" id="as" placeholder="상품명 검색..." oninput="fProd()" style="flex:1;min-width:200px"/><button class="btn btn-success" onclick="addProd()">+ 상품</button><button class="btn btn-outline" onclick="document.getElementById('prodExcel').click()">엑셀 업로드</button><input type="file" id="prodExcel" accept=".xlsx,.xls" style="display:none" onchange="ulProd(this)"/><button class="btn btn-outline" onclick="dlProd()">엑셀 다운로드</button></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>보험사</th><th>상품명</th><th>상품군</th><th>1차</th><th>2차</th><th>3차</th><th>4차</th><th>작업</th></tr></thead><tbody id="ptb"></tbody></table></div><div class="pagination" id="ppg"></div></div></div>
+<div id="aProducts"><div class="stats-bar">전체 상품: <span class="stat-val" id="st1">0</span> | 보험사: <span class="stat-val" id="st2">0</span> | 상품군: <span class="stat-val" id="st3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><div style="position:relative;min-width:140px;"><input type="text" id="acf" placeholder="전체 보험사" oninput="onAdminCompSrch()" onfocus="onAdminCompSrch()" autocomplete="off" style="width:100%;"/><div id="acdd" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:110;background:#fff;border:1.5px solid #3f51b5;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,.15);"></div></div><input type="text" id="as" placeholder="상품명 검색..." oninput="fProd()" style="flex:1;min-width:200px"/><button class="btn btn-success" onclick="addProd()">+ 상품</button><button class="btn btn-outline" onclick="document.getElementById('prodExcel').click()">엑셀 업로드</button><input type="file" id="prodExcel" accept=".xlsx,.xls" style="display:none" onchange="ulProd(this)"/><button class="btn btn-outline" onclick="dlProd()">엑셀 다운로드</button></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>보험사</th><th>상품명</th><th>상품군</th><th>1차</th><th>2차</th><th>3차</th><th>4차</th><th>작업</th></tr></thead><tbody id="ptb"></tbody></table></div><div class="pagination" id="ppg"></div></div></div>
 <div id="aRates" class="hidden"><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="rcf" onchange="fRate()" style="min-width:140px"><option value="">전체 보험사</option></select><input type="text" id="rs" placeholder="검색..." oninput="fRate()" style="flex:1;min-width:200px"/><button class="btn btn-success" onclick="addRate()">+ 지급률</button><button class="btn btn-outline" onclick="document.getElementById('rateExcel').click()">엑셀 업로드</button><input type="file" id="rateExcel" accept=".xlsx,.xls" style="display:none" onchange="ulRate(this)"/><button class="btn btn-outline" onclick="dlRate()">엑셀 다운로드</button></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>조회키</th><th>초회</th><th>선지급</th><th>성과</th><th>모집</th><th>유지</th><th>보너스</th><th>작업</th></tr></thead><tbody id="rtb"></tbody></table></div><div class="pagination" id="rpg"></div></div></div>
 <div id="aUsers" class="hidden"><div class="stats-bar">전체: <span class="stat-val" id="su1">0</span> | 관리자: <span class="stat-val" id="su2">0</span> | 이용자: <span class="stat-val" id="su3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="urf" onchange="fUser()" style="min-width:100px"><option value="">전체</option><option value="관리자">관리자</option><option value="이용자">이용자</option></select><select id="utf2" onchange="fUser()" style="min-width:100px"><option value="">전체 직책</option></select><input type="text" id="us" placeholder="이름/아이디..." oninput="fUser()" style="flex:1;min-width:160px"/><button class="btn btn-success" onclick="addUser()">+ 이용자</button><button class="btn btn-outline" onclick="document.getElementById('uExcel').click()">엑셀 업로드</button><button class="btn btn-outline" onclick="dlUser()">엑셀 다운로드</button><input type="file" id="uExcel" accept=".xlsx,.xls" style="display:none" onchange="ulUser(this)"/></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>구분</th><th>아이디</th><th>비밀번호</th><th>성명</th><th>직책</th><th>조직</th><th>작업</th></tr></thead><tbody id="utb"></tbody></table></div><div class="pagination" id="upg"></div></div></div>
 <div id="aLogs" class="hidden"><div class="card" style="padding:16px;"><div class="admin-toolbar"><input type="text" id="logSearch" placeholder="이름/아이디 검색..." oninput="rLogs()" style="flex:1;min-width:200px"/><span style="font-size:13px;color:#888;">최근 1개월</span></div><div style="overflow:auto;max-height:500px;"><table class="log-table"><thead><tr><th>시간</th><th>아이디</th><th>성명</th><th>직책</th><th>조직</th></tr></thead><tbody id="ltb"></tbody></table></div></div></div>
@@ -212,6 +212,7 @@ function resetProduct(){
 document.addEventListener('click',function(e){
   if(!e.target.closest('#companySearch')&&!e.target.closest('#cdd'))document.getElementById('cdd').style.display='none';
   if(!e.target.closest('#productSearch')&&!e.target.closest('#pdd'))document.getElementById('pdd').style.display='none';
+  if(!e.target.closest('#acf')&&!e.target.closest('#acdd'))document.getElementById('acdd').style.display='none';
 });
 
 function onSrch(){
@@ -259,8 +260,8 @@ function calc(){
 
 // ADMIN PRODUCTS
 var pp=1,pps=50,fp=[];
-function rP(){var cf=document.getElementById('acf'),cur=cf.value;cf.innerHTML='<option value="">전체 보험사</option>';D.companies.forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=c;cf.appendChild(o);});cf.value=cur;document.getElementById('st1').textContent=D.products.length;document.getElementById('st2').textContent=D.companies.length;document.getElementById('st3').textContent=new Set(D.products.map(function(p){return p.cat;})).size;fProd();}
-function fProd(){var c=document.getElementById('acf').value,s=document.getElementById('as').value.toLowerCase();fp=D.products.filter(function(p){if(c&&p.c!==c)return false;if(s&&!p.n.toLowerCase().includes(s)&&!p.cat.toLowerCase().includes(s))return false;return true;});pp=1;rPT();}
+function rP(){document.getElementById('st1').textContent=D.products.length;document.getElementById('st2').textContent=D.companies.length;document.getElementById('st3').textContent=new Set(D.products.map(function(p){return p.cat;})).size;fProd();}
+function fProd(){var c=document.getElementById('acf').dataset.selected||'',s=document.getElementById('as').value.toLowerCase();fp=D.products.filter(function(p){if(c&&p.c!==c)return false;if(s&&!p.n.toLowerCase().includes(s)&&!p.cat.toLowerCase().includes(s))return false;return true;});pp=1;rPT();}
 function rPT(){var b=document.getElementById('ptb'),st=(pp-1)*pps,pg=fp.slice(st,st+pps);b.innerHTML=pg.map(function(p,i){return '<tr data-id="'+p.id+'"><td style="color:#aaa">'+(st+i+1)+'</td><td><span class="badge badge-blue">'+p.c+'</span></td><td style="font-size:11px">'+p.n+'</td><td><span class="badge badge-green">'+p.cat+'</span></td><td style="text-align:center">'+p.r1+'</td><td style="text-align:center">'+p.r2+'</td><td style="text-align:center">'+p.r3+'</td><td style="text-align:center">'+p.r4+'</td><td><button class="btn btn-sm btn-primary" onclick="eProd('+p.id+')">수정</button> <button class="btn btn-sm btn-danger" onclick="dProd('+p.id+')">삭제</button></td></tr>';}).join('');mPg('ppg',pp,fp.length,pps,'pp','rPT');}
 function mPg(el,cur,tot,per,pv,fn){var tp=Math.ceil(tot/per),pg=document.getElementById(el);if(tp<=1){pg.innerHTML='<span>'+tot+'건</span>';return;}var h='<button '+(cur===1?'disabled':'')+' onclick="'+pv+'--;'+fn+'();">&lt;</button>';var rn=gPR(cur,tp);rn.forEach(function(n){if(n==='...')h+='<span>...</span>';else h+='<button class="'+(n===cur?'active':'')+'" onclick="'+pv+'='+n+';'+fn+'();">'+n+'</button>';});h+='<button '+(cur===tp?'disabled':'')+' onclick="'+pv+'++;'+fn+'();">&gt;</button><span>'+tot+'건</span>';pg.innerHTML=h;}
 function gPR(c,t){if(t<=7)return Array.from({length:t},function(_,i){return i+1;});var r=[1];if(c>3)r.push('...');for(var i=Math.max(2,c-1);i<=Math.min(t-1,c+1);i++)r.push(i);if(c<t-2)r.push('...');r.push(t);return r;}
@@ -388,6 +389,31 @@ function dlRate(){var allK={};Object.keys(D.rates).forEach(function(key){Object.
 function ulRate(input){var file=input.files[0];if(!file)return;if(!confirm('기존 지급률을 모두 삭제하고 덮어씁니다. 계속?')){input.value='';return;}var reader=new FileReader();reader.onload=function(e){try{var wb=XLSX.read(e.target.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{header:1});if(!rows.length||rows[0].indexOf('조회키')===-1){alert('헤더에 조회키 필요');input.value='';return;}var hd=rows[0],nr={},cnt=0;for(var i=1;i<rows.length;i++){var row=rows[i];if(!row||!row[0])continue;var key=String(row[0]),pm={};for(var j=1;j<hd.length;j++){var v=parseFloat(row[j]);if(!isNaN(v)&&v!==0)pm[String(hd[j])]=v;}nr[key]=pm;cnt++;}D.rates=nr;fRate();alert(cnt+'개 지급률 업로드');}catch(err){alert('오류:'+err.message);}input.value='';};reader.readAsArrayBuffer(file);}
 
 function rLogs(){var s=document.getElementById('logSearch').value.toLowerCase();var fl=LL.filter(function(l){if(s&&l.n.toLowerCase().indexOf(s)===-1&&l.id.toLowerCase().indexOf(s)===-1)return false;return true;});document.getElementById('ltb').innerHTML=fl.slice(0,500).map(function(l){var d=new Date(l.ts);return '<tr><td>'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</td><td>'+l.id+'</td><td>'+l.n+'</td><td>'+(l.t||'')+'</td><td>'+(l.o||'')+'</td></tr>';}).join('');}
+
+var adminSelComp='';
+function onAdminCompSrch(){
+  var dd=document.getElementById('acdd'),q=document.getElementById('acf').value.trim().toLowerCase();
+  var list=[''].concat(D.companies);
+  var res=list;
+  if(q){res=D.companies.filter(function(c){return c.toLowerCase().indexOf(q)!==-1;});}
+  else{res=D.companies;}
+  var items='<div class="prod-item" onclick="selAdminComp(-1)" style="color:#888;">전체 보험사</div>';
+  items+=res.map(function(c){
+    var nm=c;
+    if(q){var rx=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');nm=nm.replace(rx,'<span class="highlight">$1</span>');}
+    return '<div class="prod-item" onclick="selAdminComp('+D.companies.indexOf(c)+')">'+nm+'</div>';
+  }).join('');
+  if(!res.length)items='<div class="prod-item" onclick="selAdminComp(-1)" style="color:#888;">전체 보험사</div><div style="padding:12px;color:#aaa;text-align:center;font-size:13px;">결과 없음</div>';
+  dd.innerHTML=items;
+  dd.style.display='block';
+}
+function selAdminComp(idx){
+  var inp=document.getElementById('acf');
+  if(idx===-1){inp.value='';inp.dataset.selected='';adminSelComp='';}
+  else{var c=D.companies[idx];inp.value=c;inp.dataset.selected=c;adminSelComp=c;}
+  document.getElementById('acdd').style.display='none';
+  fProd();
+}
 function closeModal(el){var m=el;while(m&&!m.classList.contains('modal-overlay'))m=m.parentElement;if(m)m.remove();}
 
 </script>
