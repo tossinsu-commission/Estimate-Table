@@ -97,6 +97,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 .log-table{width:100%;border-collapse:collapse;font-size:12px}
 .log-table thead th{background:#f0f4ff;padding:8px 10px;text-align:left;font-weight:600;color:#1a237e}
 .log-table tbody td{padding:6px 10px;border-bottom:1px solid #eee}
+.admin-table td{white-space:nowrap}.admin-table td:nth-child(3){white-space:normal}
 @media(max-width:768px){.form-grid{grid-template-columns:1fr}.header{flex-direction:column;gap:12px;padding:16px}.container{padding:12px 8px}}
 </style>
 </head>
@@ -131,7 +132,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 <div class="admin-container">
 <div id="aProducts"><div class="stats-bar">전체 상품: <span class="stat-val" id="st1">0</span> | 보험사: <span class="stat-val" id="st2">0</span> | 상품군: <span class="stat-val" id="st3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="acf" onchange="fProd()" style="min-width:140px"><option value="">전체 보험사</option></select><input type="text" id="as" placeholder="상품명 검색..." oninput="fProd()" style="flex:1;min-width:200px"/><button class="btn btn-success" onclick="addProd()">+ 상품</button><button class="btn btn-outline" onclick="document.getElementById('prodExcel').click()">엑셀 업로드</button><input type="file" id="prodExcel" accept=".xlsx,.xls" style="display:none" onchange="ulProd(this)"/><button class="btn btn-outline" onclick="dlProd()">엑셀 다운로드</button></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>보험사</th><th>상품명</th><th>상품군</th><th>1차</th><th>2차</th><th>3차</th><th>4차</th><th>작업</th></tr></thead><tbody id="ptb"></tbody></table></div><div class="pagination" id="ppg"></div></div></div>
 <div id="aRates" class="hidden"><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="rcf" onchange="fRate()" style="min-width:140px"><option value="">전체 보험사</option></select><input type="text" id="rs" placeholder="검색..." oninput="fRate()" style="flex:1;min-width:200px"/><button class="btn btn-success" onclick="addRate()">+ 지급률</button><button class="btn btn-outline" onclick="document.getElementById('rateExcel').click()">엑셀 업로드</button><input type="file" id="rateExcel" accept=".xlsx,.xls" style="display:none" onchange="ulRate(this)"/><button class="btn btn-outline" onclick="dlRate()">엑셀 다운로드</button></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>조회키</th><th>초회</th><th>선지급</th><th>성과</th><th>모집</th><th>유지</th><th>보너스</th><th>작업</th></tr></thead><tbody id="rtb"></tbody></table></div><div class="pagination" id="rpg"></div></div></div>
-<div id="aUsers" class="hidden"><div class="stats-bar">전체: <span class="stat-val" id="su1">0</span> | 관리자: <span class="stat-val" id="su2">0</span> | 이용자: <span class="stat-val" id="su3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="urf" onchange="fUser()" style="min-width:100px"><option value="">전체</option><option value="관리자">관리자</option><option value="이용자">이용자</option></select><select id="utf2" onchange="fUser()" style="min-width:100px"><option value="">전체 직책</option></select><input type="text" id="us" placeholder="이름/아이디..." oninput="fUser()" style="flex:1;min-width:160px"/><button class="btn btn-success" onclick="addUser()">+ 이용자</button><button class="btn btn-outline" onclick="document.getElementById('uExcel').click()">엑셀 업로드</button><input type="file" id="uExcel" accept=".xlsx,.xls" style="display:none" onchange="ulUser(this)"/></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>구분</th><th>아이디</th><th>비밀번호</th><th>성명</th><th>직책</th><th>조직</th><th>작업</th></tr></thead><tbody id="utb"></tbody></table></div><div class="pagination" id="upg"></div></div></div>
+<div id="aUsers" class="hidden"><div class="stats-bar">전체: <span class="stat-val" id="su1">0</span> | 관리자: <span class="stat-val" id="su2">0</span> | 이용자: <span class="stat-val" id="su3">0</span></div><div class="card" style="padding:16px;"><div class="admin-toolbar"><select id="urf" onchange="fUser()" style="min-width:100px"><option value="">전체</option><option value="관리자">관리자</option><option value="이용자">이용자</option></select><select id="utf2" onchange="fUser()" style="min-width:100px"><option value="">전체 직책</option></select><input type="text" id="us" placeholder="이름/아이디..." oninput="fUser()" style="flex:1;min-width:160px"/><button class="btn btn-success" onclick="addUser()">+ 이용자</button><button class="btn btn-outline" onclick="document.getElementById('uExcel').click()">엑셀 업로드</button><button class="btn btn-outline" onclick="dlUser()">엑셀 다운로드</button><input type="file" id="uExcel" accept=".xlsx,.xls" style="display:none" onchange="ulUser(this)"/></div><div style="overflow:auto;max-height:500px;"><table class="admin-table"><thead><tr><th>#</th><th>구분</th><th>아이디</th><th>비밀번호</th><th>성명</th><th>직책</th><th>조직</th><th>작업</th></tr></thead><tbody id="utb"></tbody></table></div><div class="pagination" id="upg"></div></div></div>
 <div id="aLogs" class="hidden"><div class="card" style="padding:16px;"><div class="admin-toolbar"><input type="text" id="logSearch" placeholder="이름/아이디 검색..." oninput="rLogs()" style="flex:1;min-width:200px"/><span style="font-size:13px;color:#888;">최근 1개월</span></div><div style="overflow:auto;max-height:500px;"><table class="log-table"><thead><tr><th>시간</th><th>아이디</th><th>성명</th><th>직책</th><th>조직</th></tr></thead><tbody id="ltb"></tbody></table></div></div></div>
 </div></div>
 <script>
@@ -299,7 +300,7 @@ function saveNewProd(){
 }
 function eProd(id){var p=D.products.find(function(x){return x.id===id;});if(!p)return;var row=document.querySelector('tr[data-id="'+id+'"]');if(row.classList.contains('editing'))return;row.classList.add('editing');var cells=row.querySelectorAll('td');cells[1].innerHTML='<input class="cell-edit" value="'+p.c+'" data-field="c"/>';cells[2].innerHTML='<input class="cell-edit" value="'+p.n+'" data-field="n"/>';cells[3].innerHTML='<input class="cell-edit" value="'+p.cat+'" data-field="cat"/>';cells[4].innerHTML='<input class="cell-edit" type="number" step="0.001" value="'+p.r1+'" data-field="r1"/>';cells[5].innerHTML='<input class="cell-edit" type="number" step="0.001" value="'+p.r2+'" data-field="r2"/>';cells[6].innerHTML='<input class="cell-edit" type="number" step="0.001" value="'+p.r3+'" data-field="r3"/>';cells[7].innerHTML='<input class="cell-edit" type="number" step="0.001" value="'+p.r4+'" data-field="r4"/>';cells[8].innerHTML='<button class="btn btn-sm btn-success" onclick="sProd('+id+')">저장</button> <button class="btn btn-sm btn-outline" onclick="rP()">취소</button>';}
 function sProd(id){var p=D.products.find(function(x){return x.id===id;});document.querySelector('tr[data-id="'+id+'"]').querySelectorAll('.cell-edit').forEach(function(inp){var f=inp.dataset.field;if(f==='c'||f==='n'||f==='cat')p[f]=inp.value;else p[f]=parseFloat(inp.value)||0;});rP();}
-function dProd(id){if(!confirm('삭제?'))return;D.products=D.products.filter(function(p){return p.id!==id;});rP();}
+function dProd(id){if(!confirm('삭제하시겠습니까?'))return;D.products=D.products.filter(function(p){return p.id!==id;});rP();}
 
 // ADMIN RATES
 var rp=1,rps=30,fk=[];
@@ -308,20 +309,75 @@ function fRate(){var c=document.getElementById('rcf').value,s=document.getElemen
 function rRT(){var b=document.getElementById('rtb'),st=(rp-1)*rps,pg=fk.slice(st,st+rps);b.innerHTML=pg.map(function(k){var r=D.rates[k];return '<tr><td style="font-weight:600">'+k+'</td><td style="text-align:center">'+(r["\uCD08\uD68C"]||'-')+'</td><td style="text-align:center">'+(r["\uC120\uC9C0\uAE09"]||'-')+'</td><td style="text-align:center">'+(r["\uC131\uACFC"]||'-')+'</td><td style="text-align:center">'+(r["\uBAA8\uC9D1"]||'-')+'</td><td style="text-align:center">'+(r["\uC720\uC9C0"]||'-')+'</td><td style="text-align:center">'+(r["\uBCF4\uB108\uC2A4"]||'-')+'</td><td><button class="btn btn-sm btn-primary" onclick="eRate(&quot;'+k+'&quot;)">상세</button> <button class="btn btn-sm btn-danger" onclick="dRate(&quot;'+k+'&quot;)">삭제</button></td></tr>';}).join('');mPg('rpg',rp,fk.length,rps,'rp','rRT');}
 function eRate(key){var r=D.rates[key];var ent=Object.entries(r).sort(function(a,b){var na=parseInt(a[0]),nb=parseInt(b[0]);if(!isNaN(na)&&!isNaN(nb))return na-nb;if(!isNaN(na))return 1;if(!isNaN(nb))return -1;return a[0].localeCompare(b[0]);});var h='<div style="max-height:400px;overflow:auto;"><div class="rate-edit-grid">';ent.forEach(function(e){h+='<div class="rate-edit-item"><label>'+e[0]+'</label><input type="number" step="0.001" value="'+e[1]+'" data-key="'+e[0]+'"/></div>';});h+='</div></div>';var m=document.createElement('div');m.className='modal-overlay';m.innerHTML='<div class="modal"><h2>'+key+'</h2>'+h+'<div style="display:flex;gap:8px;margin-top:16px;"><button class="btn btn-primary" style="flex:1" onclick="sRate(this)">저장</button><button class="btn btn-outline" style="flex:1" onclick="closeModal(this)">닫기</button></div></div>';m.dataset.rateKey=key;document.body.appendChild(m);}
 function sRate(btn){var m=btn.closest('.modal-overlay'),key=m.dataset.rateKey,nd={};m.querySelectorAll('.rate-edit-grid input').forEach(function(inp){var v=parseFloat(inp.value);if(!isNaN(v)&&v!==0)nd[inp.dataset.key]=v;});D.rates[key]=nd;m.remove();rRT();}
-function addRate(){var k=prompt('조회키:');if(!k)return;if(D.rates[k]){alert('이미 존재');return;}D.rates[k]={};eRate(k);fRate();}
-function dRate(k){if(!confirm(k+' 삭제?'))return;delete D.rates[k];fRate();}
+function addRate(){
+  var m=document.createElement('div');m.className='modal-overlay';
+  m.innerHTML='<div class="modal" style="width:480px;"><h2>지급률 추가</h2>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">조회키 (보험사+상품군)</label><input id="ar_key" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="예: 메트라이프연금"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">초회</label><input id="ar_ch" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">선지급</label><input id="ar_sj" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">성과</label><input id="ar_sg" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">모집</label><input id="ar_mj" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">유지</label><input id="ar_yj" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="margin-bottom:12px;"><label style="font-size:12px;color:#555;font-weight:600;">보너스</label><input id="ar_bn" type="number" step="0.001" value="0" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"/></div>'
+    +'<div style="display:flex;gap:8px;margin-top:16px;"><button class="btn btn-primary" style="flex:1;" onclick="saveNewRate()">추가</button><button class="btn btn-outline" style="flex:1;" onclick="closeModal(this)">취소</button></div></div>';
+  document.body.appendChild(m);document.getElementById('ar_key').focus();
+}
+function saveNewRate(){
+  var k=document.getElementById('ar_key').value.trim();
+  if(!k){alert('조회키를 입력하세요.');return;}
+  if(D.rates[k]){alert('이미 존재하는 키입니다.');return;}
+  var rd={};
+  var ch=parseFloat(document.getElementById('ar_ch').value)||0;if(ch)rd['초회']=ch;
+  var sj=parseFloat(document.getElementById('ar_sj').value)||0;if(sj)rd['선지급']=sj;
+  var sg=parseFloat(document.getElementById('ar_sg').value)||0;if(sg)rd['성과']=sg;
+  var mj=parseFloat(document.getElementById('ar_mj').value)||0;if(mj)rd['모집']=mj;
+  var yj=parseFloat(document.getElementById('ar_yj').value)||0;if(yj)rd['유지']=yj;
+  var bn=parseFloat(document.getElementById('ar_bn').value)||0;if(bn)rd['보너스']=bn;
+  D.rates[k]=rd;
+  document.querySelector('.modal-overlay').remove();
+  fRate();alert('지급률이 추가되었습니다.');
+}
+function dRate(k){if(!confirm(k+' 지급률을 삭제하시겠습니까?'))return;delete D.rates[k];fRate();}
 
 // ADMIN USERS
 var up=1,ups=50,fu=[];
 function rU(){var tf=document.getElementById('utf2'),cur=tf.value;tf.innerHTML='<option value="">전체 직책</option>';var titles=[];USERS.forEach(function(u){if(u.t&&titles.indexOf(u.t)===-1)titles.push(u.t);});titles.sort().forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;tf.appendChild(o);});tf.value=cur;document.getElementById('su1').textContent=USERS.length;document.getElementById('su2').textContent=USERS.filter(function(u){return u.r==='관리자';}).length;document.getElementById('su3').textContent=USERS.filter(function(u){return u.r==='이용자';}).length;fUser();}
 function fUser(){var r=document.getElementById('urf').value,t=document.getElementById('utf2').value,s=document.getElementById('us').value.toLowerCase();fu=USERS.filter(function(u){if(r&&u.r!==r)return false;if(t&&u.t!==t)return false;if(s&&u.n.toLowerCase().indexOf(s)===-1&&u.id.toLowerCase().indexOf(s)===-1)return false;return true;});up=1;rUT();}
 function rUT(){var b=document.getElementById('utb'),st=(up-1)*ups,pg=fu.slice(st,st+ups);b.innerHTML=pg.map(function(u,i){var rc=u.r==='관리자'?'badge-orange':'badge-blue',idx=USERS.indexOf(u);return '<tr data-ui="'+idx+'"><td style="color:#aaa">'+(st+i+1)+'</td><td><span class="badge '+rc+'">'+u.r+'</span></td><td>'+u.id+'</td><td>'+u.pw+'</td><td>'+u.n+'</td><td><span class="badge badge-green">'+u.t+'</span></td><td style="font-size:11px;color:#888">'+u.o2+(u.o3?' > '+u.o3:'')+'</td><td><button class="btn btn-sm btn-primary" onclick="eUser('+idx+')">수정</button> <button class="btn btn-sm btn-danger" onclick="dUser('+idx+')">삭제</button></td></tr>';}).join('');mPg('upg',up,fu.length,ups,'up','rUT');}
-function addUser(){var id=prompt('아이디:');if(!id)return;if(USERS.find(function(u){return u.id===id;})){alert('중복');return;}var pw=prompt('비밀번호:');if(!pw)return;var n=prompt('성명:');if(!n)return;var t=prompt('직책:')||'';var r=confirm('관리자?')?'관리자':'이용자';USERS.push({r:r,id:id,pw:pw,n:n,t:t,o2:'',o3:''});rU();}
+function addUser(){
+  var m=document.createElement('div');m.className='modal-overlay';
+  m.innerHTML='<div class="modal" style="width:500px;"><h2>이용자 추가</h2>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">구분</label><select id="au_r" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;"><option value="이용자">이용자</option><option value="관리자">관리자</option></select></div>'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">아이디</label><input id="au_id" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="아이디"/></div>'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">비밀번호</label><input id="au_pw" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="비밀번호"/></div>'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">성명</label><input id="au_n" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="성명"/></div>'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">직책</label><input id="au_t" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="IA, AM, 지점장 등"/></div>'
+    +'<div><label style="font-size:12px;color:#555;font-weight:600;">조직경로2</label><input id="au_o2" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="예: 직영 사업단"/></div>'
+    +'<div style="grid-column:1/-1;"><label style="font-size:12px;color:#555;font-weight:600;">조직경로3</label><input id="au_o3" style="width:100%;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;margin-top:4px;" placeholder="예: 직영2 총괄본부"/></div>'
+    +'</div>'
+    +'<div style="display:flex;gap:8px;margin-top:20px;"><button class="btn btn-primary" style="flex:1;" onclick="saveNewUser()">추가</button><button class="btn btn-outline" style="flex:1;" onclick="closeModal(this)">취소</button></div></div>';
+  document.body.appendChild(m);document.getElementById('au_id').focus();
+}
+function saveNewUser(){
+  var id=document.getElementById('au_id').value.trim();
+  if(!id){alert('아이디를 입력하세요.');return;}
+  if(USERS.find(function(u){return u.id===id;})){alert('이미 존재하는 아이디입니다.');return;}
+  var pw=document.getElementById('au_pw').value.trim();
+  if(!pw){alert('비밀번호를 입력하세요.');return;}
+  var n=document.getElementById('au_n').value.trim();
+  if(!n){alert('성명을 입력하세요.');return;}
+  USERS.push({r:document.getElementById('au_r').value,id:id,pw:pw,n:n,t:document.getElementById('au_t').value.trim(),o2:document.getElementById('au_o2').value.trim(),o3:document.getElementById('au_o3').value.trim()});
+  document.querySelector('.modal-overlay').remove();
+  rU();alert('이용자가 추가되었습니다.');
+}
 function eUser(idx){var u=USERS[idx];var row=document.querySelector('tr[data-ui="'+idx+'"]');if(!row||row.classList.contains('editing'))return;row.classList.add('editing');var c=row.querySelectorAll('td');c[1].innerHTML='<select class="cell-edit" data-field="r"><option value="이용자"'+(u.r==='이용자'?' selected':'')+'>이용자</option><option value="관리자"'+(u.r==='관리자'?' selected':'')+'>관리자</option></select>';c[2].innerHTML='<input class="cell-edit" value="'+u.id+'" data-field="id"/>';c[3].innerHTML='<input class="cell-edit" value="'+u.pw+'" data-field="pw"/>';c[4].innerHTML='<input class="cell-edit" value="'+u.n+'" data-field="n"/>';c[5].innerHTML='<input class="cell-edit" value="'+u.t+'" data-field="t"/>';c[6].innerHTML='';c[7].innerHTML='<button class="btn btn-sm btn-success" onclick="sUser('+idx+')">저장</button> <button class="btn btn-sm btn-outline" onclick="rU()">취소</button>';}
 function sUser(idx){document.querySelector('tr[data-ui="'+idx+'"]').querySelectorAll('.cell-edit').forEach(function(inp){USERS[idx][inp.dataset.field]=inp.value;});rU();}
-function dUser(idx){if(!confirm(USERS[idx].n+' 삭제?'))return;USERS.splice(idx,1);rU();}
+function dUser(idx){if(!confirm(USERS[idx].n+'님을 삭제하시겠습니까?'))return;USERS.splice(idx,1);rU();}
 
 // EXCEL USERS
+function dlUser(){var data=[['구분','아이디','PW','성명','직책','조직경로2','조직경로3']];USERS.forEach(function(u){data.push([u.r,u.id,u.pw,u.n,u.t,u.o2||'',u.o3||'']);});var ws=XLSX.utils.aoa_to_sheet(data);ws['!cols']=[{wch:8},{wch:15},{wch:12},{wch:10},{wch:8},{wch:20},{wch:20}];var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'이용자');XLSX.writeFile(wb,'이용자_'+new Date().toISOString().slice(0,10)+'.xlsx');}
+
 function ulUser(input){var file=input.files[0];if(!file)return;if(!confirm('기존 이용자를 모두 삭제하고 덮어씁니다. 계속?')){input.value='';return;}var reader=new FileReader();reader.onload=function(e){try{var wb=XLSX.read(e.target.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{header:1});var hr=-1;for(var i=0;i<Math.min(10,rows.length);i++){if(rows[i]&&rows[i].indexOf('구분')!==-1&&rows[i].indexOf('아이디')!==-1){hr=i;break;}}if(hr===-1){alert('헤더에 구분,아이디,PW,성명,직책 필요');input.value='';return;}var hd=rows[hr],cm={};hd.forEach(function(h,i){if(h==='구분')cm.r=i;if(h==='아이디')cm.id=i;if(h==='PW')cm.pw=i;if(h==='성명')cm.n=i;if(h==='직책')cm.t=i;if(h==='조직경로2')cm.o2=i;if(h==='조직경로3')cm.o3=i;});USERS.length=0;var cnt=0;for(var i=hr+1;i<rows.length;i++){var row=rows[i];if(!row||!row[cm.id])continue;var t=String(row[cm.t]||'');USERS.push({r:String(row[cm.r]||'이용자'),id:String(row[cm.id]),pw:t==='스탭'?'asd123!!':String(row[cm.pw]||''),n:String(row[cm.n]||''),t:t,o2:String(row[cm.o2]||''),o3:String(row[cm.o3]||'')});cnt++;}rU();alert(cnt+'명 업로드');}catch(err){alert('오류:'+err.message);}input.value='';};reader.readAsArrayBuffer(file);}
 
 // EXCEL PRODUCTS
